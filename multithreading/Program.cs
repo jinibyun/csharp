@@ -18,8 +18,13 @@ namespace multithreading
             // var obj = new _04threadPool();
 
             // parallel
-            var obj = new _05parallel();
+            // var obj = new _05parallel();
+
+            var obj = new _07threadSafe();
             obj.DoTest();
+
+
+            // NOTE: other than lock (thread safe), Monitor, Mutex, Semaphone, AutoResetEvent, CountDownEvetn are just skipped
         }
     }
 }
