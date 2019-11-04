@@ -10,28 +10,42 @@ namespace multithreading
         // private BackgroundWorker worker;
         public void DoTest()
         {
+            /*
             // threadPool
-            // in case of "no" return
+            // in case of "no" return value
             // ---------------- 1. using c
-            // ThreadPool.QueueUserWorkItem(Calc); // radius=null
-            // ThreadPool.QueueUserWorkItem(Calc, 10.0); // radius=10
-            // ThreadPool.QueueUserWorkItem(Calc, 20.0);
+            // ThreadPool automatically assign thread from ThreadPool and will execute it
+            ThreadPool.QueueUserWorkItem(Calc); // radius=null
+            ThreadPool.QueueUserWorkItem(Calc, 10.0); // radius=10
+            ThreadPool.QueueUserWorkItem(Calc, 20.0);
+            Console.ReadLine();
 
+            // theory: 256 thread per CPU.
+            // process: 1 cpu, 50 threads
+            // 1 thread immediately created, but 49 thread would take time (1 thread per 2 sec : Thread Throttling)
+            // To avoid "Thread Throttling" (Thread Delaying), use ThreadPool.SetMaxThreads(), ThreadPool.SetMinThreads() 
+            */
+
+            /*
             // NOTE: the below is not supported in net core
             // ---------------- 2. asynchronous delegate
-            // Func<int, int, int> work = GetArea;
-            // IAsyncResult asyncRes = work.BeginInvoke(10, 20, null, null);
+            Func<int, int, int> work = GetArea;
+            IAsyncResult asyncRes = work.BeginInvoke(10, 20, null, null);
 
-            // Console.WriteLine("Do something in Main thread");
+            Console.WriteLine("Do something in Main thread");
 
-            // // EndInvoke is wating for the thread to be finished           
-            // int result = work.EndInvoke(asyncRes);
-            // Console.WriteLine("Result: {0}", result);
+            // EndInvoke is wating for the thread to be finished           
+            int result = work.EndInvoke(asyncRes);
+            Console.WriteLine("Result: {0}", result);
+            */
 
             // ------------------ 3. backgroundworker class
-            // worker = new BackgroundWorker();
-            // worker.DoWork += new DoWorkEventHandler(worker_DoWork);
-            // worker.RunWorkerAsync();
+            // BackgroundWorker comes from "ThreadPool" and event base
+            var worker = new BackgroundWorker();
+            worker.DoWork += new DoWorkEventHandler(worker_DoWork);
+            worker.RunWorkerAsync(); // acutal execute process
+            Console.ReadLine();
+
 
             // ------------------ 4. Task (immediate start)
             // same concept as #1. QueueUserWorkItem
@@ -39,7 +53,7 @@ namespace multithreading
             // Task.Factory.StartNew(new Action<object>(Run), "1st");
             // Task.Factory.StartNew(Run, "2nd");
             // Task.Factory.StartNew( () => Console.WriteLine("test") );
-            
+
             // ----------------- 5. Task (no immediate start)
             // using new Task
             // Task t1 = new Task(new Action(Run2));
@@ -60,21 +74,21 @@ namespace multithreading
 
             // Console.ReadLine();
 
-            // ----------------- 6. Task<T> : can have return value
-            Task<int> task = Task.Factory.StartNew<int>(() => CalcSize("Hello World"));
+            //// ----------------- 6. Task<T> : can have return value
+            //Task<int> task = Task.Factory.StartNew<int>(() => CalcSize("Hello World"));
 
-            // main thread : other job execution
-            Thread.Sleep(1000);
+            //// main thread : other job execution
+            //Thread.Sleep(1000);
 
-            // wait
-            int result = task.Result;
+            //// wait
+            //int result = task.Result;
 
-            Console.WriteLine("Result={0}", result);
+            //Console.WriteLine("Result={0}", result);
         }
 
-        
 
-        
+
+
 
         void Calc(object radius)
         {
@@ -93,7 +107,7 @@ namespace multithreading
 
         void worker_DoWork(object sender, DoWorkEventArgs e)
         {            
-            Console.WriteLine("Long running task");
+            Console.WriteLine("... Long running task ...");
         }
 
         void Run(object data)

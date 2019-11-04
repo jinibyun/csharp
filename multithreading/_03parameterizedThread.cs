@@ -25,7 +25,6 @@ namespace multithreading
             Console.WriteLine("Run");
         }
 
-        // radius라는 파라미터를 object 타입으로 받아들임
         void Calc(object radius)
         {
             double r = (double)radius;

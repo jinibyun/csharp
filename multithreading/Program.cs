@@ -15,12 +15,13 @@ namespace multithreading
             // var obj = new _03parameterizedThread();
 
             // threadPool
-            // var obj = new _04threadPool();
+            var obj = new _04threadPool();
 
             // parallel
             // var obj = new _05parallel();
 
-            var obj = new _07threadSafe();
+            // var obj = new _07threadSafe();
+
             obj.DoTest();
 
 

@@ -5,6 +5,10 @@ namespace multithreading
 {
     public class _01basic
     {
+        // NOTE:
+        // parameter can be either 
+        // "ThreadStart" delegate or "ParameterizedThreadStart" delegate
+        // The below shows "ThreadStart" delegate
         public void DoTest()
         {
             // 1. create new thread
@@ -39,8 +43,10 @@ namespace multithreading
         void Run()
         {
             Console.WriteLine("Thread#{0}: Begin", Thread.CurrentThread.ManagedThreadId);
+            
             // Do Something
             Thread.Sleep(3000);
+
             Console.WriteLine("Thread#{0}: End", Thread.CurrentThread.ManagedThreadId);
         }
     }
