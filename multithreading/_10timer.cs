@@ -9,16 +9,17 @@ namespace multithreading
     {
         public void DoTest(){
             
-            // Timer support "multi" thread
+            // Timer support "multi" thread : System.Threading.Timer or System.Timers.Timer
             Timer timer = new System.Timers.Timer();
-            timer.Interval = 60 * 60* 1000; // 1 시간
+            timer.Interval = 60 * 60 * 1000; // 1 hour
             timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
             timer.Start();
 
             Console.WriteLine("Press Enter to exit");
             Console.ReadLine();
-        }
+        }    
 
+        // Timer class supports multi-threading. NOTE: Not always same thread is executing event handler. Therefore be mindful "thread-safe"
         // work thread from thread-pool is executing
         static void timer_Elapsed(object sender, ElapsedEventArgs e)
         {

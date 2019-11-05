@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace multithreading
 {
-    public class _09threadSafe
+    public class _11threadSafe
     {
         private int counter = 100;
         private object lockObject = new object();
@@ -20,9 +20,7 @@ namespace multithreading
             {
                 new Thread(safeCalc).Start();    
             }
-            
-        }
-        
+        }        
 
         // unsafe thread method
         private void UnsafeCalc(object obj)
@@ -30,24 +28,26 @@ namespace multithreading
             // all thread trying to change
             counter++;
 
+            // pretend complicated process
             for (int i = 0; i < counter; i++)
                 for (int j = 0; j < counter; j++) ;
             
-            Console.WriteLine(counter);
-            
+            Console.WriteLine(counter);            
         }
 
         // safe thread method
+        // "thread-safe" = "thread synchronization"
         private void safeCalc(object obj)
         {
             // only one thread execute one method at a time 
-
-            // lock : same as Monitoer.Enter() and Monitor.Exit() 
+            // lock : same as Monitor.Enter() and Monitor.Exit() 
             lock (lockObject)
             {                
                 counter++;
+                // pretend complicated process
                 for (int i = 0; i < counter; i++)
                     for (int j = 0; j < counter; j++) ;
+
                 Console.WriteLine(counter);
             }
         }

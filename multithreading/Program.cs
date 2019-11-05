@@ -27,7 +27,16 @@ namespace multithreading
             // var obj = new _07Task_T();
 
             // parallel (data parallel)
-            var obj = new _08parallel();
+            // var obj = new _08parallel();
+
+            // Async and Await
+            // var obj = new _09AwaitAyanc();
+
+            // timer
+            // var obj = new _10timer();
+
+            // thread safe
+            var obj = new _11threadSafe();
 
             // var obj = new _09threadSafe();
 
