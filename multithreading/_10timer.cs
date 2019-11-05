@@ -5,7 +5,7 @@ using System.Timers;
 
 namespace multithreading
 {
-    public class _06timer
+    public class _10timer
     {
         public void DoTest(){
             

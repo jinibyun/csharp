@@ -10,10 +10,8 @@ namespace multithreading
         // private BackgroundWorker worker;
         public void DoTest()
         {
-            /*
             // threadPool
-            // in case of "no" return value
-            // ---------------- 1. using c
+            // in case of "no" return value            
             // ThreadPool automatically assign thread from ThreadPool and will execute it
             ThreadPool.QueueUserWorkItem(Calc); // radius=null
             ThreadPool.QueueUserWorkItem(Calc, 10.0); // radius=10
@@ -24,11 +22,11 @@ namespace multithreading
             // process: 1 cpu, 50 threads
             // 1 thread immediately created, but 49 thread would take time (1 thread per 2 sec : Thread Throttling)
             // To avoid "Thread Throttling" (Thread Delaying), use ThreadPool.SetMaxThreads(), ThreadPool.SetMinThreads() 
-            */
+
 
             /*
             // NOTE: the below is not supported in net core
-            // ---------------- 2. asynchronous delegate
+            // asynchronous delegate
             Func<int, int, int> work = GetArea;
             IAsyncResult asyncRes = work.BeginInvoke(10, 20, null, null);
 
@@ -39,51 +37,6 @@ namespace multithreading
             Console.WriteLine("Result: {0}", result);
             */
 
-            // ------------------ 3. backgroundworker class
-            // BackgroundWorker comes from "ThreadPool" and event base
-            var worker = new BackgroundWorker();
-            worker.DoWork += new DoWorkEventHandler(worker_DoWork);
-            worker.RunWorkerAsync(); // acutal execute process
-            Console.ReadLine();
-
-
-            // ------------------ 4. Task (immediate start)
-            // same concept as #1. QueueUserWorkItem
-            // Task.Factory.StartNew(new Action<object>(Run), null); //create and execute thread immediately
-            // Task.Factory.StartNew(new Action<object>(Run), "1st");
-            // Task.Factory.StartNew(Run, "2nd");
-            // Task.Factory.StartNew( () => Console.WriteLine("test") );
-
-            // ----------------- 5. Task (no immediate start)
-            // using new Task
-            // Task t1 = new Task(new Action(Run2));
-
-            // // using lambda expression
-            // Task t2 = new Task(() =>
-            // {
-            //     Console.WriteLine("Long query");
-            // });
-
-            // // Task thread start
-            // t1.Start();
-            // t2.Start();
-
-            // // wait for Task to be finished
-            // t1.Wait();
-            // t2.Wait(); 
-
-            // Console.ReadLine();
-
-            //// ----------------- 6. Task<T> : can have return value
-            //Task<int> task = Task.Factory.StartNew<int>(() => CalcSize("Hello World"));
-
-            //// main thread : other job execution
-            //Thread.Sleep(1000);
-
-            //// wait
-            //int result = task.Result;
-
-            //Console.WriteLine("Result={0}", result);
         }
 
 
@@ -108,24 +61,6 @@ namespace multithreading
         void worker_DoWork(object sender, DoWorkEventArgs e)
         {            
             Console.WriteLine("... Long running task ...");
-        }
-
-        void Run(object data)
-        {            
-            Console.WriteLine(data == null ? "NULL" : data);
-           
-        }
-
-        void Run2()
-        {            
-            Console.WriteLine("Long running method");
-        }
-
-        int CalcSize(string data)
-        {
-            string s = data == null ? "" : data.ToString();
-            // assume complex calculation
-            return s.Length;
         }
     }
 }

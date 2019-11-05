@@ -15,12 +15,21 @@ namespace multithreading
             // var obj = new _03parameterizedThread();
 
             // threadPool
-            var obj = new _04threadPool();
+            // var obj = new _04threadPool();
 
-            // parallel
-            // var obj = new _05parallel();
+            // BackgroundWorker: Emulating windows application using console application
+            // var obj = new _05BackgroundWorkerEvent();
 
-            // var obj = new _07threadSafe();
+            // Task
+            // var obj = new _06Task();
+
+            // Task<T>
+            // var obj = new _07Task_T();
+
+            // parallel (data parallel)
+            var obj = new _08parallel();
+
+            // var obj = new _09threadSafe();
 
             obj.DoTest();
 

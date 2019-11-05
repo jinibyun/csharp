@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace multithreading
 {
-    public class _07threadSafe
+    public class _09threadSafe
     {
         private int counter = 100;
         private object lockObject = new object();
