@@ -12,14 +12,26 @@ namespace dataStructure
         static void Main(string[] args)
         {
             // testSortedTest();
-            // testLinkedList();
+            testLinkedList();
             // testQueue();
             // testConcurrentQueue();
             // testStack();
             // testConcurrentStack();
             // testDictionary();
-            testConcurrentDictionary();
-        }
+            // testConcurrentDictionary();
+            // testBinaryTree();            
+        }        
+
+        private static void testBinaryTree()
+        {
+            BinaryTree<int> btree = new BinaryTree<int>();
+            btree.Root = new BinaryTreeNode<int>(1);
+            btree.Root.Left = new BinaryTreeNode<int>(2);
+            btree.Root.Right = new BinaryTreeNode<int>(3);
+            btree.Root.Left.Left = new BinaryTreeNode<int>(4);
+
+            btree.PreOrderTraversal(btree.Root);
+        }        
 
         private static void testConcurrentDictionary()
         {
