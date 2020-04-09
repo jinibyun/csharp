@@ -21,6 +21,7 @@ namespace multithreading
 
         // Timer class supports multi-threading. NOTE: Not always same thread is executing event handler. Therefore be mindful "thread-safe"
         // work thread from thread-pool is executing
+        // NOTE: with lock statement is "thread-safe" way.: refer to _11threadSafe.cs
         static void timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             // download html

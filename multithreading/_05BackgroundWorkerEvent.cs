@@ -9,6 +9,7 @@ namespace multithreading
     // NOTE: this process is emulating "window form" using console application
     public class _05BackgroundWorkerEvent
     {
+        // BackgroundWorker is event-based asynchronous process which is based on thread from threadpool
         private BackgroundWorker worker;
 
         public void DoTest()
@@ -23,7 +24,7 @@ namespace multithreading
 
 
             // progress and cancellation
-            worker = new BackgroundWorker();
+            worker = new BackgroundWorker(); // thread from threadpool
             worker.WorkerReportsProgress = true; // progress
             worker.WorkerSupportsCancellation = true; // cancellation is possible
 

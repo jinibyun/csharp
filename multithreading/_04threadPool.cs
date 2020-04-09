@@ -11,21 +11,27 @@ namespace multithreading
         public void DoTest()
         {
             // threadPool
-            // in case of "no" return value            
+            // in case of "no" return value, QueueUserWorkItem is normally used            
             // ThreadPool automatically assign thread from ThreadPool and will execute it
             ThreadPool.QueueUserWorkItem(Calc); // radius=null
             ThreadPool.QueueUserWorkItem(Calc, 10.0); // radius=10
             ThreadPool.QueueUserWorkItem(Calc, 20.0);
             Console.ReadLine();
 
-            // theory: 256 thread per CPU.
-            // process: 1 cpu, 50 threads
-            // 1 thread immediately created, but 49 thread would take time (1 thread per 2 sec : Thread Throttling)
+            // in case of return value, then Asynchronous delegate is normally used.
+            // But, dotnet core environment, it is not supported.
+
+            // theory: 1 to 256 thread per CPU.
+            // e.g. 1024 threads for 4 CPU computer.
+
+            // e.g. 1 thread immediately created, but 49 thread would take time (1 thread per 2 sec : Thread Throttling)
+            // therefore, we had better use "threadPool" with below options.
             // To avoid "Thread Throttling" (Thread Delaying), use ThreadPool.SetMaxThreads(), ThreadPool.SetMinThreads() 
 
 
             /*
             // NOTE: the below is not supported in net core
+            // NOTE: Therefore, we use Task or Task<T>
             // asynchronous delegate
             Func<int, int, int> work = GetArea;
             IAsyncResult asyncRes = work.BeginInvoke(10, 20, null, null);

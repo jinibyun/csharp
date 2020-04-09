@@ -9,6 +9,11 @@ namespace multithreading
     {
         public void DoTest()
         {
+            // Task class (from .net 4.0) is the class from getting new thread from threadpool to execut asynchronous process
+            // Task : no return
+            // Task<T>: return. T is type of return (refer to _07Task_T.cs)
+
+
             // Task (immediate start)
             // same concept as ThreadPool's QueueUserWorkItem: This is also immediate start
             Task.Factory.StartNew(new Action<object>(Run), null); //create and execute thread immediately
